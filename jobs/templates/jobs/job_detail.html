@@ -1,0 +1,13 @@
+{% extends 'jobs/base.html' %}
+
+{% block content %}
+<h1>{{ job.title }}</h1>
+<p><strong> Company: {{ job.company }}</strong></p>
+<p><strong> Location: {{ job.location }}</strong></p>
+<p> Description: {{ job.description }}</p>
+<p><strong> Salary: ${{ job.salary }}</strong></p>
+<a href="{% url 'apply_for_job' pk=job.pk %}">Apply Now</a>
+{% if job.owner == request.user %}
+    <a href = "{% url 'view_applications' pk=job.pk %}" class = "btn btn-info">View Applications</a>
+{% endif %}
+{% endblock %}

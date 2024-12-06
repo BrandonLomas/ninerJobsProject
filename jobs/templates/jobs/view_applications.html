@@ -1,0 +1,21 @@
+{% extends 'jobs/base.html' %}
+
+{% block title %} Applications for {{ job.title }} {% endblock %}
+
+{% block content %}
+    <h1> Applications for {{ job.title }} </h1>
+
+    {% if applications %}
+        <ul>
+            {% for application in applications %}
+                <li> 
+                    <strong>{{ application.applicant_name}} </strong>
+                    <p> Applied on {{ application.applied_date }}</p>
+                    <p>Resume: <a href="{{ application.resume.url }}">Download</a></p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p> No applications yet. </p>
+    {% endif %}
+{% endblock %}

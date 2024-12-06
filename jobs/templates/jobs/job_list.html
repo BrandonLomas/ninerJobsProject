@@ -1,0 +1,27 @@
+{% extends 'jobs/base.html' %}
+{%block title %} Job Listings {% endblock %}
+
+{% block content %}
+
+<h1> Job Listings </h1>
+<a href = "{% url 'add_job' %}" class = "btn btn-primary">Add New Job</a>
+<ul class ="list-group">
+    {% for job in jobs %}
+        <div class = "job-card">
+            <h3> {{job.title}}</h3>
+            <p> {{job.description}} </p>
+            <p><strong> Company: {{job.company}} </strong></p>
+            <p><strong> Location: {{job.location}}</strong></p>
+            {% if job.owner == request.user %}
+                <a href="{% url 'edit_job' pk=job.pk %}" class = "btn btn-primary">Edit</a>
+                <form method = "post" action="{% url 'delete_job' pk=job.pk %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            {% endif %}
+            <a href="{% url 'job_detail' pk=job.pk %}" class = "btn btn-primary"> View Details</a>
+        </div>
+    {% endfor %}
+</ul>
+
+{% endblock %}
