@@ -81,5 +81,9 @@ def view_applications(request, pk):
     applications = job.applications.all()
     return render(request, 'jobs/view_applications.html', {'job': job, 'applications': applications})
 
+@login_required
+def profile(request):
+    return render(request, 'profile.html')
+
 def home(request):
     return render(request, 'home.html')
