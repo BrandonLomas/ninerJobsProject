@@ -8,6 +8,20 @@
 <p>Add a profile picture</p>
 <p>Add a description</p>
 <p>View Applications</p>
+{% if applications %}
+        <ul>
+            {% for application in applications %}
+                <li>
+                    <strong>Job Title:</strong> {{ application.job.title }}<br>
+                    <strong>Applied On:</strong> {{ application.applied_date|date:"Y-m-d H:i" }}<br>
+                    <strong>Company:</strong> {{ application.job.company }}<br>
+                    <a href="{{ application.resume.url }}" target="_blank">Download Resume</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You have not applied for any jobs yet.</p>
+    {% endif %}
 
 
 

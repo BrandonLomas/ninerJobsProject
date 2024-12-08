@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
-from .models import Job
+from .models import Job, Application
 from .forms import ApplicationForm, JobForm
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
@@ -83,7 +83,13 @@ def view_applications(request, pk):
 
 @login_required
 def profile(request):
-    return render(request, 'profile.html')
+    # Get the currently logged-in user
+    user = request.user
+    # Get all applications where the current user is the applicant
+    applications = Application.objects.filter(applicant_name=user)
+    
+    return render(request, 'profile.html', {'applications': applications})
+
 
 def home(request):
     return render(request, 'home.html')
