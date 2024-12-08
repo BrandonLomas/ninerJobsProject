@@ -90,6 +90,8 @@ def profile(request):
     
     return render(request, 'profile.html', {'applications': applications})
 
+def learnSkills(request):
+    return render(request, 'jobs/learnSkills.html')
 
 def home(request):
     return render(request, 'home.html')
